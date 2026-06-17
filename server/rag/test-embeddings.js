@@ -1,18 +1,14 @@
-import fs from "fs";
+import { getQueryEmbedding } from "./queryEmbedding.js";
 
-const chunks = JSON.parse(
-    fs.readFileSync("./chunks.json", "utf8")
-);
+try {
+    const embedding = await getQueryEmbedding(
+        "What causes migraine?"
+    );
 
-const embeddings = JSON.parse(
-    fs.readFileSync("./embeddings.json", "utf8")
-);
-
-console.log("Chunks:", chunks.length);
-console.log("Embeddings:", embeddings.length);
-
-const chunkIds = chunks.map(c => c.chunkId);
-
-const uniqueIds = new Set(chunkIds);
-
-console.log("Unique IDs:", uniqueIds.size);
+    console.log(
+        "Embedding length:",
+        embedding.length
+    );
+} catch (err) {
+    console.error(err);
+}
