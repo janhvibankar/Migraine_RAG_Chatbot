@@ -1,7 +1,25 @@
 import { retrieve } from "../rag/retriever.js";
 import { generateAnswer } from "../rag/generateAnswer.js";
+//import { chatHistoryCollection } from "../rag/mongo.js";
+//import { saveMessage } from "./chatHistoryService.js";
 
-export async function getRAGResponse(question) {
+import {
+  saveMessage,
+  getPreviousMessages
+} from "./chatHistoryService.js";
+
+//export async function getRAGResponse(question) {
+
+export async function getRAGResponse(question, sessionId) {
+
+  const previousMessages = await getPreviousMessages(sessionId);
+  console.log(previousMessages);
+
+  await saveMessage(
+    sessionId,
+    "user",
+    question
+  );
 
   const docs = await retrieve(question);
 
@@ -11,8 +29,15 @@ export async function getRAGResponse(question) {
 
   const answer = await generateAnswer(
     context,
-    question
+    question,
+    previousMessages
+
   );
 
+  await saveMessage(
+    sessionId,
+    "assistant",
+    answer
+  );
   return answer;
 }

@@ -16,6 +16,10 @@ const client = new MongoClient(process.env.MONGODB_URI);
 await client.connect();
 
 const db = client.db("migraine_rag");
-const collection = db.collection("knowledge_chunks");
+//const collection = db.collection("knowledge_chunks");
+export const knowledgeCollection = db.collection("knowledge_chunks");
 
-export default collection;
+export const chatHistoryCollection = db.collection("chat_history");
+
+
+//export default collection;

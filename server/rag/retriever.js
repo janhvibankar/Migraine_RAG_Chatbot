@@ -1,4 +1,6 @@
-import collection from "./mongo.js";
+//import collection from "./mongo.js";
+
+import { knowledgeCollection } from "./mongo.js";
 import { getQueryEmbedding } from "./queryEmbedding.js";
 
 export async function retrieve(question) {
@@ -6,7 +8,7 @@ export async function retrieve(question) {
     const queryEmbedding =
         await getQueryEmbedding(question);
 
-    const results = await collection.aggregate([
+    const results = await knowledgeCollection.aggregate([
         {
             $vectorSearch: {
                 index: "vector_index",

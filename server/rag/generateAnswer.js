@@ -5,19 +5,56 @@ const model = new ChatGroq({
   model: "llama-3.3-70b-versatile",
   temperature: 0,
 });
-export async function generateAnswer(context, question) {
-  const prompt = `
-You are a migraine assistant.
+export async function generateAnswer(context, question, previousMessages) {
 
-Context:
+  const conversationHistory =
+    previousMessages.length > 0
+      ? previousMessages
+        .map(msg =>
+          `${msg.role === "user" ? "User" : "Assistant"}: ${msg.message}`
+        )
+        .join("\n")
+      : "No previous conversation.";
+
+  const prompt = `
+You are an AI Migraine Assistant.
+
+You help users by answering migraine-related questions using:
+1. The previous conversation (if relevant).
+2. The retrieved knowledge base context.
+
+--------------------------------------------------
+
+Previous Conversation:
+
+${conversationHistory}
+
+--------------------------------------------------
+
+Retrieved Knowledge:
+
 ${context}
 
-Question:
+--------------------------------------------------
+
+Current User Question:
+
 ${question}
 
-Rules:
-- Answer only from the context.
-- If the answer is not present in the context, say:
+--------------------------------------------------
+
+Instructions:
+
+- Use the previous conversation only when it helps resolve references such as:
+  "it", "its", "them", "those", "this", "that".
+
+- Use the retrieved knowledge as the primary source of factual information.
+
+- If the current question is completely unrelated to the previous conversation, ignore the conversation history.
+
+- Do not invent information.
+
+- If the answer cannot be found in the retrieved knowledge, reply:
 "I don't have enough information in the knowledge base."
 
 Answer:
