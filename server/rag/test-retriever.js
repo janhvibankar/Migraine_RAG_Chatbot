@@ -1,4 +1,4 @@
-import { retrieve } from "./retriever.js";
+import { retrieveDocuments } from "./retriever.js";
 
 const question =
     "What foods trigger migraine?";
@@ -7,7 +7,7 @@ const chunks =
     await retrieve(question);
 
 console.log("\nRetrieved Chunks:\n");
-
+ss
 chunks.forEach((chunk, index) => {
 
     console.log(

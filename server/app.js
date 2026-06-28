@@ -2,8 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import chatRoutes from "./routes/chatRoutes.js";
+import { connectDB } from "./config/db.js";
 
 dotenv.config();
+
+console.log("MONGODB_URI =", process.env.MONGODB_URI);
+
+await connectDB();
 
 const app = express();
 

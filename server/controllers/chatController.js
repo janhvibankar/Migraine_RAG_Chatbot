@@ -1,4 +1,5 @@
-import { getGeminiResponse } from "../services/geminiService.js";
+import { getRAGResponse }
+from "../services/ragService.js";
 
 export const chatWithBot = async (req, res) => {
   try {
@@ -10,7 +11,8 @@ export const chatWithBot = async (req, res) => {
       });
     }
 
-    const reply = await getGeminiResponse(message);
+   const reply =
+await getRAGResponse(message);
 
     res.status(200).json({
       reply
