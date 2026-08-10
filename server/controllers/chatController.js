@@ -12,11 +12,13 @@ export const chatWithBot = async (req, res) => {
       });
     }
 
-    const reply = await getRAGResponse(message, sessionId);
+    const { answer, sources } = await getRAGResponse(message, sessionId);
 
     res.status(200).json({
-      reply
+      answer,
+      sources
     });
+
   } catch (error) {
     console.error("Controller Error:", error);
 

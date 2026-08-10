@@ -22,6 +22,7 @@ export async function getRAGResponse(question, sessionId) {
   );
 
   const docs = await retrieve(question);
+  const sources = [...new Set(docs.map(doc => doc.fileName))];
 
   const context = docs
     .map(doc => doc.text)
@@ -39,5 +40,5 @@ export async function getRAGResponse(question, sessionId) {
     "assistant",
     answer
   );
-  return answer;
+  return { answer, sources };
 }

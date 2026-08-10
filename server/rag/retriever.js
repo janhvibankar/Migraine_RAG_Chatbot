@@ -21,12 +21,19 @@ export async function retrieve(question) {
         {
             $project: {
                 text: 1,
+                fileName: 1,
+                folder: 1,
+                chunkId: 1,
                 score: {
                     $meta: "vectorSearchScore"
                 }
             }
         }
     ]).toArray();
+
+    console.log("Retrieved Results:");
+console.log(results);
+console.log("Length:", results.length);
 
     return results;
 }

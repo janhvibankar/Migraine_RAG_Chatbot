@@ -1,3 +1,4 @@
+import "./config/dns-override.js";   //// added for connecting and also creted dns-override file via antiravity
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
