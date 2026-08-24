@@ -24,15 +24,10 @@ export async function getRAGResponse(question, sessionId) {
   const docs = await retrieve(question);
   const sources = [...new Set(docs.map(doc => doc.fileName))];
 
-  const context = docs
-    .map(doc => doc.text)
-    .join("\n\n");
-
   const answer = await generateAnswer(
-    context,
+    docs,
     question,
     previousMessages
-
   );
 
   await saveMessage(
