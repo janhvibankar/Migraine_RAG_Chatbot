@@ -7,7 +7,7 @@ import { connectDB } from "./config/db.js";
 
 dotenv.config();
 
-console.log("MONGODB_URI =", process.env.MONGODB_URI);
+console.log("MongoDB URI:", process.env.MONGODB_URI ? "configured" : "NOT configured");
 
 await connectDB();
 
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send("Server Running");
 });
 
-console.log("APP ENV =", process.env.GOOGLE_API_KEY);
+console.log("Google API Key:", process.env.GOOGLE_API_KEY ? "configured" : "NOT configured");
 app.use("/api/chat", chatRoutes);
 
 const PORT = process.env.PORT || 5000;

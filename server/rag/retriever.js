@@ -1,14 +1,12 @@
-//import collection from "./mongo.js";
-
 import { knowledgeCollection } from "./mongo.js";
 import { getQueryEmbedding } from "./queryEmbedding.js";
 
 export async function retrieve(question) {
+    const minSimilarity = Number(process.env.RAG_MIN_SIMILARITY ?? "0");
 
-    const queryEmbedding =
-        await getQueryEmbedding(question);
+    const queryEmbedding = await getQueryEmbedding(question);
 
-    const results = await knowledgeCollection.aggregate([
+    const rawResults = await knowledgeCollection.aggregate([
         {
             $vectorSearch: {
                 index: "vector_index",
@@ -31,9 +29,13 @@ export async function retrieve(question) {
         }
     ]).toArray();
 
+    const results = minSimilarity > 0
+        ? rawResults.filter(doc => (doc.score ?? 0) >= minSimilarity)
+        : rawResults;
+
     console.log("Retrieved Results:");
-console.log(results);
-console.log("Length:", results.length);
+    console.log(results);
+    console.log("Length:", results.length);
 
     return results;
 }

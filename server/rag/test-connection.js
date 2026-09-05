@@ -4,10 +4,9 @@ import fs from "fs";
 
 dotenv.config({ path: "../.env" });
 console.log("ENV EXISTS:", fs.existsSync("../.env"));
-console.log("MONGODB_URI:", process.env.MONGODB_URI);
+console.log("MongoDB URI:", process.env.MONGODB_URI ? "configured" : "NOT configured");
 
 const uri = process.env.MONGODB_URI;
-console.log("URI =", uri);
 
 async function test() {
   try {

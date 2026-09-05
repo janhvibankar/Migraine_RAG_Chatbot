@@ -11,8 +11,8 @@ dotenv.config({
 });
 
 console.log(
-    "KEY:",
-    process.env.GOOGLE_API_KEY?.substring(0, 20)
+    "Google API Key:",
+    process.env.GOOGLE_API_KEY ? "configured" : "NOT configured"
 );
 
 const ai = new GoogleGenAI({

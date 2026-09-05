@@ -2,7 +2,7 @@ import { loadMarkdownFiles } from "./loader.js";
 import { cleanText } from "./cleaner.js";
 import { chunkText } from "./chunker.js";
 
-const docs = loadMarkdownFiles("./documents/knowledge_base");
+const docs = await loadMarkdownFiles("./documents/knowledge_base");
 
 const cleanedDocs = docs.map(doc => ({
     ...doc,

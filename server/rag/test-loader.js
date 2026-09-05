@@ -1,6 +1,6 @@
 import { loadMarkdownFiles } from "./loader.js";
 
-const docs = loadMarkdownFiles("./documents/knowledge_base");
+const docs = await loadMarkdownFiles("./documents/knowledge_base");
 
 console.log(docs);
 console.log(`Loaded ${docs.length} files`);

@@ -1,26 +1,33 @@
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import dns from "dns";   //// added for connecting and also creted dns-override file via antiravity
+import path from "path";
+import { fileURLToPath } from "url";
+import "./dns-override.js";
 
-// Override DNS servers to use Google's public DNS, as some local ISP or network DNS servers
-// refuse or fail to resolve SRV records required by MongoDB Atlas.
-dns.setServers(["8.8.8.8", "8.8.4.4"]);   //// upto here
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, "../.env"),
+});
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
-export async function connectDB() {
-    try {
-        await client.connect();
-        await client.db("migraine_rag").command({ ping: 1 });
+await client.connect();
 
-        console.log("✅ MongoDB Atlas Connected");
-    } catch (error) {
-        console.error("❌ MongoDB Connection Failed");
-        console.error(error);
-    }
+export const db = client.db("migraine_rag");
+export const knowledgeCollection = db.collection("knowledge_chunks");
+export const chatHistoryCollection = db.collection("chat_history");
+
+export async function connectDB() {
+  try {
+    await db.command({ ping: 1 });
+    console.log("✅ MongoDB Atlas Connected");
+  } catch (error) {
+    console.error("❌ MongoDB Connection Failed");
+    console.error(error);
+  }
 }
 
+export { client };
 export default client;
