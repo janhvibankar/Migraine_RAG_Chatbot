@@ -1,5 +1,6 @@
 import "./config/dns-override.js";   //// added for connecting and also creted dns-override file via antiravity
 import express from "express";
+import helmet from "helmet";
 import cors from "cors";
 import dotenv from "dotenv";
 import chatRoutes from "./routes/chatRoutes.js";
@@ -12,6 +13,8 @@ console.log("MongoDB URI:", process.env.MONGODB_URI ? "configured" : "NOT config
 await connectDB();
 
 const app = express();
+
+app.use(helmet());
 
 const allowedOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(",").map(origin => origin.trim()).filter(Boolean)
