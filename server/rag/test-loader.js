@@ -1,6 +1,13 @@
+import path from "path";
+import { fileURLToPath } from "url";
 import { loadMarkdownFiles } from "./loader.js";
 
-const docs = await loadMarkdownFiles("./documents/knowledge_base");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const docs = await loadMarkdownFiles(
+    path.resolve(__dirname, "./documents/knowledge_base")
+);
 
 console.log(docs);
 console.log(`Loaded ${docs.length} files`);

@@ -17,11 +17,11 @@ const ai = new GoogleGenAI({
 
 async function recoverMissing() {
     const chunks = JSON.parse(
-        fs.readFileSync("./chunks.json", "utf8")
+        fs.readFileSync(path.resolve(__dirname, "./chunks.json"), "utf8")
     );
 
     const embeddings = JSON.parse(
-        fs.readFileSync("./embeddings.json", "utf8")
+        fs.readFileSync(path.resolve(__dirname, "./embeddings.json"), "utf8")
     );
 
     const embeddedKeys = new Set(
@@ -70,7 +70,7 @@ async function recoverMissing() {
     }
 
     fs.writeFileSync(
-        "./embeddings.json",
+        path.resolve(__dirname, "./embeddings.json"),
         JSON.stringify(embeddings, null, 2)
     );
 
