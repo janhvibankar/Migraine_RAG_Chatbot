@@ -17,7 +17,7 @@ const ai = new GoogleGenAI({
 
 async function generateEmbeddings() {
     const chunks = JSON.parse(
-        fs.readFileSync("./chunks.json", "utf-8")
+        fs.readFileSync(path.resolve(__dirname, "./chunks.json"), "utf-8")
     );
 
     const embeddedChunks = [];
@@ -51,7 +51,7 @@ async function generateEmbeddings() {
     }
 
     fs.writeFileSync(
-        "./embeddings.json",
+        path.resolve(__dirname, "./embeddings.json"),
         JSON.stringify(embeddedChunks, null, 2)
     );
 

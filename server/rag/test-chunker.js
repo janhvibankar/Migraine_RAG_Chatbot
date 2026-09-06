@@ -1,8 +1,16 @@
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import { loadMarkdownFiles } from "./loader.js";
 import { cleanText } from "./cleaner.js";
 import { chunkText } from "./chunker.js";
 
-const docs = await loadMarkdownFiles("./documents/knowledge_base");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const docs = await loadMarkdownFiles(
+    path.resolve(__dirname, "./documents/knowledge_base")
+);
 
 const cleanedDocs = docs.map(doc => ({
     ...doc,
@@ -29,10 +37,8 @@ console.log(`Chunks: ${allChunks.length}`);
 
 console.log(allChunks[0]);
 
-import fs from "fs";
-
 fs.writeFileSync(
-    "./chunks.json",
+    path.resolve(__dirname, "./chunks.json"),
     JSON.stringify(allChunks, null, 2)
 );
 
