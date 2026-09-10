@@ -1,3 +1,5 @@
+
+import "../config/dns-override.js";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import fs from "fs";

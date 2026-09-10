@@ -37,6 +37,13 @@ app.get("/", (req, res) => {
 console.log("Google API Key:", process.env.GOOGLE_API_KEY ? "configured" : "NOT configured");
 app.use("/api/chat", chatRoutes);
 
+// 404 Handler for undefined routes
+app.use((req, res) => {
+  res.status(404).json({
+    error: `Cannot ${req.method} ${req.originalUrl} - Route not found.`
+  });
+});
+
 // Global error handling middleware for parser and runtime middleware errors
 app.use((err, req, res, next) => {
   if (
