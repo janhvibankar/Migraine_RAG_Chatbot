@@ -1,0 +1,602 @@
+[
+  {
+    "conceptId": "triggers",
+    "title": "Concept 1: Migraine Triggers",
+    "expectedTopics": [
+      "triggers",
+      "lifestyle",
+      "foods",
+      "stress",
+      "sleep"
+    ],
+    "languages": {
+      "en": {
+        "query": "What are common migraine triggers?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8837485313415527,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 8,
+            "preview": "lights:** fluorescent lights, sunlight glare, strobing - **Strong smells:** perfume, paint, cigarette smoke, cleaning products - **Loud noise** - **Weather chan"
+          },
+          {
+            "rank": 2,
+            "score": 0.8746609687805176,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 7,
+            "preview": "pain. More common in older adults. It can be alarming when it occurs for the first time — first episode always warrants evaluation to rule out TIA. --- ## SECTI"
+          },
+          {
+            "rank": 3,
+            "score": 0.8746169805526733,
+            "fileName": "non_drug_therapies.md",
+            "folder": "treatments",
+            "chunkId": 12,
+            "preview": "trigger identification - Track: date/time, duration, severity (0–10), location, associated symptoms, potential triggers (sleep, food, stress, hormones, weather,"
+          },
+          {
+            "rank": 4,
+            "score": 0.8689835071563721,
+            "fileName": "food_triggers.md",
+            "folder": "triggers",
+            "chunkId": 1,
+            "preview": "# Food Triggers in Migraine: Early Warning Prediction System ## Overview Dietary factors are among the most commonly reported migraine triggers, affecting appro"
+          },
+          {
+            "rank": 5,
+            "score": 0.8686941862106323,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 19,
+            "preview": "is a known trigger; warm up gradually - Exercise reduces stress, improves sleep, and reduces migraine frequency **Screen Habits:** - Use blue-light filter / nig"
+          }
+        ]
+      },
+      "hi": {
+        "query": "माइग्रेन के आम कारण क्या हैं?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.872348427772522,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 2,
+            "preview": "--- **Q1.4: What causes migraine?** The exact cause is not fully understood, but the leading mechanisms include: - **Cortical Spreading Depression (CSD):** A sl"
+          },
+          {
+            "rank": 2,
+            "score": 0.8641605973243713,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 7,
+            "preview": "pain. More common in older adults. It can be alarming when it occurs for the first time — first episode always warrants evaluation to rule out TIA. --- ## SECTI"
+          },
+          {
+            "rank": 3,
+            "score": 0.8616368770599365,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 8,
+            "preview": "lights:** fluorescent lights, sunlight glare, strobing - **Strong smells:** perfume, paint, cigarette smoke, cleaning products - **Loud noise** - **Weather chan"
+          },
+          {
+            "rank": 4,
+            "score": 0.8615052700042725,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 1,
+            "preview": "# Migraine FAQ — Comprehensive Reference **Document Type:** Frequently Asked Questions — Clinical & Patient Reference **System:** Migraine Early Warning Predict"
+          },
+          {
+            "rank": 5,
+            "score": 0.8590565919876099,
+            "fileName": "what_is_migraine.md",
+            "folder": "migraine_basics",
+            "chunkId": 2,
+            "preview": "| Duration (untreated) | 4–72 hours | | Associated symptoms | Nausea, vomiting, photophobia, phonophobia, osmophobia | | Aggravating factors | Physical activity"
+          }
+        ]
+      },
+      "mr": {
+        "query": "मायग्रेन होण्याची सामान्य कारणे कोणती आहेत?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8657754063606262,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 2,
+            "preview": "--- **Q1.4: What causes migraine?** The exact cause is not fully understood, but the leading mechanisms include: - **Cortical Spreading Depression (CSD):** A sl"
+          },
+          {
+            "rank": 2,
+            "score": 0.8637838959693909,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 8,
+            "preview": "lights:** fluorescent lights, sunlight glare, strobing - **Strong smells:** perfume, paint, cigarette smoke, cleaning products - **Loud noise** - **Weather chan"
+          },
+          {
+            "rank": 3,
+            "score": 0.8611013889312744,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 7,
+            "preview": "pain. More common in older adults. It can be alarming when it occurs for the first time — first episode always warrants evaluation to rule out TIA. --- ## SECTI"
+          },
+          {
+            "rank": 4,
+            "score": 0.8595278263092041,
+            "fileName": "what_is_migraine.md",
+            "folder": "migraine_basics",
+            "chunkId": 2,
+            "preview": "| Duration (untreated) | 4–72 hours | | Associated symptoms | Nausea, vomiting, photophobia, phonophobia, osmophobia | | Aggravating factors | Physical activity"
+          },
+          {
+            "rank": 5,
+            "score": 0.8576325178146362,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 1,
+            "preview": "# Migraine FAQ — Comprehensive Reference **Document Type:** Frequently Asked Questions — Clinical & Patient Reference **System:** Migraine Early Warning Predict"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "conceptId": "hydration",
+    "title": "Concept 2: Dehydration & Migraine",
+    "expectedTopics": [
+      "hydration",
+      "water intake",
+      "fluid loss"
+    ],
+    "languages": {
+      "en": {
+        "query": "Can dehydration trigger migraine?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.9056433439254761,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 3,
+            "preview": "(heat, exercise, alcohol, stress) --- ## 4. Dehydration Triggers Specific to Migraineurs ### Environmental Triggers - **Heat exposure:** Each 10°C rise in ambie"
+          },
+          {
+            "rank": 2,
+            "score": 0.9030094146728516,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 1,
+            "preview": "# Hydration — Knowledge Base for Migraine Early Warning RAG System ## Document Metadata - **Domain:** Nutrition / Neurology - **Purpose:** RAG knowledge base fo"
+          },
+          {
+            "rank": 3,
+            "score": 0.9010814428329468,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 2,
+            "preview": "**Cortisol elevation:** Dehydration stress → hypothalamic-pituitary-adrenal (HPA) axis activation → cortisol spike → serotonin dysregulation 6. **Reduced seroto"
+          },
+          {
+            "rank": 4,
+            "score": 0.8998218774795532,
+            "fileName": "hydration_habits.md",
+            "folder": "lifestyle",
+            "chunkId": 1,
+            "preview": "# Hydration Habits — Lifestyle Knowledge Base **Category:** Lifestyle Factors **Version:** 1.0 | **Last Updated:** June 2026 **For:** RAG-Based Migraine Early W"
+          },
+          {
+            "rank": 5,
+            "score": 0.8898664712905884,
+            "fileName": "hydration_habits.md",
+            "folder": "lifestyle",
+            "chunkId": 2,
+            "preview": "action potential thresholds | | Serotonin dysregulation | Plasma volume reduction alters serotonin concentration and receptor binding | | Cortisol elevation | D"
+          }
+        ]
+      },
+      "hi": {
+        "query": "क्या पानी की कमी से माइग्रेन हो सकता है?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.897104799747467,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 1,
+            "preview": "# Hydration — Knowledge Base for Migraine Early Warning RAG System ## Document Metadata - **Domain:** Nutrition / Neurology - **Purpose:** RAG knowledge base fo"
+          },
+          {
+            "rank": 2,
+            "score": 0.8949798345565796,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 9,
+            "preview": "al. — A randomized trial on the effects of regular water intake in migraine patients"
+          },
+          {
+            "rank": 3,
+            "score": 0.8945741653442383,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 2,
+            "preview": "**Cortisol elevation:** Dehydration stress → hypothalamic-pituitary-adrenal (HPA) axis activation → cortisol spike → serotonin dysregulation 6. **Reduced seroto"
+          },
+          {
+            "rank": 4,
+            "score": 0.8915344476699829,
+            "fileName": "hydration_habits.md",
+            "folder": "lifestyle",
+            "chunkId": 1,
+            "preview": "# Hydration Habits — Lifestyle Knowledge Base **Category:** Lifestyle Factors **Version:** 1.0 | **Last Updated:** June 2026 **For:** RAG-Based Migraine Early W"
+          },
+          {
+            "rank": 5,
+            "score": 0.8893619775772095,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 3,
+            "preview": "(heat, exercise, alcohol, stress) --- ## 4. Dehydration Triggers Specific to Migraineurs ### Environmental Triggers - **Heat exposure:** Each 10°C rise in ambie"
+          }
+        ]
+      },
+      "mr": {
+        "query": "पाणी कमी प्यायल्याने मायग्रेन होऊ शकतो का?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8941624164581299,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 1,
+            "preview": "# Hydration — Knowledge Base for Migraine Early Warning RAG System ## Document Metadata - **Domain:** Nutrition / Neurology - **Purpose:** RAG knowledge base fo"
+          },
+          {
+            "rank": 2,
+            "score": 0.8915327787399292,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 2,
+            "preview": "**Cortisol elevation:** Dehydration stress → hypothalamic-pituitary-adrenal (HPA) axis activation → cortisol spike → serotonin dysregulation 6. **Reduced seroto"
+          },
+          {
+            "rank": 3,
+            "score": 0.8914992809295654,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 9,
+            "preview": "al. — A randomized trial on the effects of regular water intake in migraine patients"
+          },
+          {
+            "rank": 4,
+            "score": 0.8889090418815613,
+            "fileName": "hydration_habits.md",
+            "folder": "lifestyle",
+            "chunkId": 1,
+            "preview": "# Hydration Habits — Lifestyle Knowledge Base **Category:** Lifestyle Factors **Version:** 1.0 | **Last Updated:** June 2026 **For:** RAG-Based Migraine Early W"
+          },
+          {
+            "rank": 5,
+            "score": 0.8817113637924194,
+            "fileName": "hydration.md",
+            "folder": "nutrition",
+            "chunkId": 3,
+            "preview": "(heat, exercise, alcohol, stress) --- ## 4. Dehydration Triggers Specific to Migraineurs ### Environmental Triggers - **Heat exposure:** Each 10°C rise in ambie"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "conceptId": "symptoms",
+    "title": "Concept 3: Migraine Symptoms",
+    "expectedTopics": [
+      "symptoms",
+      "headache",
+      "nausea",
+      "photophobia",
+      "aura"
+    ],
+    "languages": {
+      "en": {
+        "query": "What are common migraine symptoms?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8663538694381714,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 6,
+            "preview": "head (unilateral) in ~60%; can be bifrontal or bilateral especially in children - **Quality:** Throbbing, pulsating, or pounding (in contrast to the pressing/ti"
+          },
+          {
+            "rank": 2,
+            "score": 0.8645595908164978,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 5,
+            "preview": "Photopsia: flashing lights or sparks - Blurring or loss of part of visual field (homonymous hemianopia) - **Sensory aura (~30–40% of aura cases):** - Pins and n"
+          },
+          {
+            "rank": 3,
+            "score": 0.8644979000091553,
+            "fileName": "what_is_migraine.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# What Is Migraine ## Overview Migraine is a genetically influenced, complex neurological disorder characterized by recurrent episodes of moderate-to-severe hea"
+          },
+          {
+            "rank": 4,
+            "score": 0.8626539707183838,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 4,
+            "preview": "carbohydrates), mood changes (depression, irritability, euphoria), neck stiffness, fatigue, increased urination, fluid retention, difficulty concentrating - **E"
+          },
+          {
+            "rank": 5,
+            "score": 0.8625860214233398,
+            "fileName": "migraine_types.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# Migraine Types ## Overview Migraine is not a single uniform disorder but a spectrum of neurological conditions sharing core mechanisms yet differing in presen"
+          }
+        ]
+      },
+      "hi": {
+        "query": "माइग्रेन के सामान्य लक्षण क्या हैं?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8744502663612366,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 6,
+            "preview": "head (unilateral) in ~60%; can be bifrontal or bilateral especially in children - **Quality:** Throbbing, pulsating, or pounding (in contrast to the pressing/ti"
+          },
+          {
+            "rank": 2,
+            "score": 0.8710960149765015,
+            "fileName": "migraine_phases.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# Migraine Phases ## Overview A migraine attack is not simply a headache — it is a complex, multi-phase neurological event that can span 1 to 5 days. Understand"
+          },
+          {
+            "rank": 3,
+            "score": 0.8707849979400635,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 5,
+            "preview": "Photopsia: flashing lights or sparks - Blurring or loss of part of visual field (homonymous hemianopia) - **Sensory aura (~30–40% of aura cases):** - Pins and n"
+          },
+          {
+            "rank": 4,
+            "score": 0.8704736828804016,
+            "fileName": "what_is_migraine.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# What Is Migraine ## Overview Migraine is a genetically influenced, complex neurological disorder characterized by recurrent episodes of moderate-to-severe hea"
+          },
+          {
+            "rank": 5,
+            "score": 0.8690625429153442,
+            "fileName": "migraine_types.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# Migraine Types ## Overview Migraine is not a single uniform disorder but a spectrum of neurological conditions sharing core mechanisms yet differing in presen"
+          }
+        ]
+      },
+      "mr": {
+        "query": "मायग्रेनची सामान्य लक्षणे कोणती आहेत?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8713247776031494,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 6,
+            "preview": "head (unilateral) in ~60%; can be bifrontal or bilateral especially in children - **Quality:** Throbbing, pulsating, or pounding (in contrast to the pressing/ti"
+          },
+          {
+            "rank": 2,
+            "score": 0.8702112436294556,
+            "fileName": "what_is_migraine.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# What Is Migraine ## Overview Migraine is a genetically influenced, complex neurological disorder characterized by recurrent episodes of moderate-to-severe hea"
+          },
+          {
+            "rank": 3,
+            "score": 0.8692286610603333,
+            "fileName": "migraine_faq.md",
+            "folder": "faq",
+            "chunkId": 5,
+            "preview": "Photopsia: flashing lights or sparks - Blurring or loss of part of visual field (homonymous hemianopia) - **Sensory aura (~30–40% of aura cases):** - Pins and n"
+          },
+          {
+            "rank": 4,
+            "score": 0.8690177202224731,
+            "fileName": "migraine_phases.md",
+            "folder": "migraine_basics",
+            "chunkId": 1,
+            "preview": "# Migraine Phases ## Overview A migraine attack is not simply a headache — it is a complex, multi-phase neurological event that can span 1 to 5 days. Understand"
+          },
+          {
+            "rank": 5,
+            "score": 0.8682534098625183,
+            "fileName": "symptom_tracking.md",
+            "folder": "tracking",
+            "chunkId": 2,
+            "preview": "- Neck pain or stiffness (most common physical prodrome — reported in 60–80% of patients) - Shoulder tension - Scalp tenderness (precedes allodynia) **Sensory S"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "conceptId": "weather",
+    "title": "Concept 4: Barometric Pressure & Weather",
+    "expectedTopics": [
+      "barometric pressure",
+      "weather",
+      "temperature"
+    ],
+    "languages": {
+      "en": {
+        "query": "How does barometric pressure affect migraine?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.9108864068984985,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 1,
+            "preview": "# Barometric Pressure Changes and Migraine: A Comprehensive Reference ## Document Metadata - **Domain**: Migraine Early Warning Prediction System - **Category**"
+          },
+          {
+            "rank": 2,
+            "score": 0.8962318897247314,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 7,
+            "preview": "can trigger attacks, possibly via rebound vascular mechanisms. **Q: What's the best single meteorological variable for migraine prediction?** A: Pressure change"
+          },
+          {
+            "rank": 3,
+            "score": 0.8941808938980103,
+            "fileName": "weather_triggers.md",
+            "folder": "triggers",
+            "chunkId": 1,
+            "preview": "# Weather & Environmental Triggers in Migraine: Early Warning Prediction System ## Overview Meteorological and environmental factors are cited as migraine trigg"
+          },
+          {
+            "rank": 4,
+            "score": 0.893894374370575,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 3,
+            "preview": "with increased headache reports in susceptible individuals - Both drops AND rises can trigger migraines, but drops have stronger statistical association - The t"
+          },
+          {
+            "rank": 5,
+            "score": 0.8854076266288757,
+            "fileName": "humidity_effects.md",
+            "folder": "weather",
+            "chunkId": 9,
+            "preview": "prevent weather-related migraines?** A: For individuals whose migraines are triggered by dry air (low humidity), maintaining indoor humidity at 40–55% can reduc"
+          }
+        ]
+      },
+      "hi": {
+        "query": "वायुमंडलीय दबाव माइग्रेन को कैसे प्रभावित करता है?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.9045259952545166,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 1,
+            "preview": "# Barometric Pressure Changes and Migraine: A Comprehensive Reference ## Document Metadata - **Domain**: Migraine Early Warning Prediction System - **Category**"
+          },
+          {
+            "rank": 2,
+            "score": 0.8965796232223511,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 7,
+            "preview": "can trigger attacks, possibly via rebound vascular mechanisms. **Q: What's the best single meteorological variable for migraine prediction?** A: Pressure change"
+          },
+          {
+            "rank": 3,
+            "score": 0.8903232216835022,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 3,
+            "preview": "with increased headache reports in susceptible individuals - Both drops AND rises can trigger migraines, but drops have stronger statistical association - The t"
+          },
+          {
+            "rank": 4,
+            "score": 0.8868306279182434,
+            "fileName": "weather_triggers.md",
+            "folder": "triggers",
+            "chunkId": 1,
+            "preview": "# Weather & Environmental Triggers in Migraine: Early Warning Prediction System ## Overview Meteorological and environmental factors are cited as migraine trigg"
+          },
+          {
+            "rank": 5,
+            "score": 0.8833839893341064,
+            "fileName": "humidity_effects.md",
+            "folder": "weather",
+            "chunkId": 9,
+            "preview": "prevent weather-related migraines?** A: For individuals whose migraines are triggered by dry air (low humidity), maintaining indoor humidity at 40–55% can reduc"
+          }
+        ]
+      },
+      "mr": {
+        "query": "हवेचा दाब मायग्रेनवर कसा परिणाम करतो?",
+        "count": 5,
+        "documents": [
+          {
+            "rank": 1,
+            "score": 0.8984396457672119,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 1,
+            "preview": "# Barometric Pressure Changes and Migraine: A Comprehensive Reference ## Document Metadata - **Domain**: Migraine Early Warning Prediction System - **Category**"
+          },
+          {
+            "rank": 2,
+            "score": 0.8904534578323364,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 7,
+            "preview": "can trigger attacks, possibly via rebound vascular mechanisms. **Q: What's the best single meteorological variable for migraine prediction?** A: Pressure change"
+          },
+          {
+            "rank": 3,
+            "score": 0.8892712593078613,
+            "fileName": "pressure_changes.md",
+            "folder": "weather",
+            "chunkId": 3,
+            "preview": "with increased headache reports in susceptible individuals - Both drops AND rises can trigger migraines, but drops have stronger statistical association - The t"
+          },
+          {
+            "rank": 4,
+            "score": 0.8831599950790405,
+            "fileName": "weather_triggers.md",
+            "folder": "triggers",
+            "chunkId": 1,
+            "preview": "# Weather & Environmental Triggers in Migraine: Early Warning Prediction System ## Overview Meteorological and environmental factors are cited as migraine trigg"
+          },
+          {
+            "rank": 5,
+            "score": 0.8828446865081787,
+            "fileName": "humidity_effects.md",
+            "folder": "weather",
+            "chunkId": 9,
+            "preview": "prevent weather-related migraines?** A: For individuals whose migraines are triggered by dry air (low humidity), maintaining indoor humidity at 40–55% can reduc"
+          }
+        ]
+      }
+    }
+  }
+]

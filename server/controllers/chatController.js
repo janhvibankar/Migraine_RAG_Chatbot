@@ -2,10 +2,11 @@ import { getRAGResponse } from "../services/ragService.js";
 
 const SESSION_ID_REGEX = /^[A-Za-z0-9_-]{1,64}$/;
 const MAX_MESSAGE_LENGTH = 1000;
+const SUPPORTED_LANGUAGES = ["en", "hi", "mr"];
 
 export const chatWithBot = async (req, res) => {
   try {
-    const { message, sessionId } = req.body || {};
+    const { message, sessionId, language } = req.body || {};
 
     // Validate message
     if (typeof message !== "string") {
@@ -43,7 +44,16 @@ export const chatWithBot = async (req, res) => {
       });
     }
 
-    const { answer, sources } = await getRAGResponse(cleanMessage, cleanSessionId);
+    // Validate language strictly against supported set with "en" fallback
+    let validatedLanguage = "en";
+    if (typeof language === "string") {
+      const cleanLang = language.trim().toLowerCase();
+      if (SUPPORTED_LANGUAGES.includes(cleanLang)) {
+        validatedLanguage = cleanLang;
+      }
+    }
+
+    const { answer, sources } = await getRAGResponse(cleanMessage, cleanSessionId, validatedLanguage);
 
     res.status(200).json({
       answer,

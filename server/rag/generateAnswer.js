@@ -11,7 +11,9 @@ const model = new ChatGroq({
   temperature: 0,
 });
 
-const SYSTEM_INSTRUCTIONS = `You are the response-generation component of a migraine health information chatbot.
+const SUPPORTED_LANGUAGES = ["en", "hi", "mr"];
+
+const BASE_SYSTEM_INSTRUCTIONS = `You are the response-generation component of a migraine health information chatbot.
 
 Your job is to answer the user's question using ONLY the retrieved knowledge/context provided to you.
 
@@ -66,34 +68,13 @@ ANSWER LENGTH AND DETAIL:
 8. Prefer concise sections and bullet points over long paragraphs.
 9. The answer should be easy to scan and read on a mobile phone.
 
-LANGUAGE AND READABILITY:
-1. Use simple, everyday English that a general adult patient can understand without medical knowledge.
-2. Write as if explaining the topic to a person who has no medical background. Keep sentences short and natural.
-3. Avoid unnecessary medical, scientific, or technical terminology. Do NOT include medical terminology in parentheses after a simple explanation unless the user explicitly asks for the medical terminology (for example, write "sensitivity to light" instead of "sensitivity to light (photophobia)", "sensitivity to sound" instead of "sensitivity to sound (phonophobia)", and "sensitivity to smells" instead of "sensitivity to smells (osmophobia)").
-4. Avoid terms such as photophobia, phonophobia, osmophobia, cephalalgia, vasoconstriction, osmoreceptors, HPA axis, cortical spreading depression, or other detailed physiological or medical mechanisms. Do not include these terms in simple answers unless the user's question specifically requires them.
-5. For basic questions such as "What is migraine?", do not introduce "migraine aura" or other specialized concepts unless they are directly relevant to the question. If such a term is necessary, explain it in simple language.
-6. Prefer natural patient-friendly wording:
-   - "strong headache" instead of "moderate-to-severe head pain" when medically appropriate
-   - "brain health condition" or another simple accurate description instead of "neurological disorder" or other unnecessarily technical terminology
-   - "sensitivity to light" instead of "photophobia"
-   - "sensitivity to sound" instead of "phonophobia"
-   - "sensitivity to smells" instead of "osmophobia"
-7. If an important medical term must be used, explain it immediately in simple language.
-8. Do not use multiple medical terms in a single sentence unless they are necessary.
-9. Prefer active voice over complex passive constructions.
-10. Avoid unnecessarily formal words such as:
-    "therefore", "hence", "subsequently", "manifestation", "exacerbation", "etiology", etc.
-11. The answer should sound like a helpful healthcare assistant explaining something to a patient, NOT like a medical textbook.
-12. Do NOT sacrifice medical accuracy for simplicity. Simplify the language, not the medical meaning.
-13. For basic questions, prioritize understanding over completeness.
-
 SOURCE FORMATTING:
 If source information is available in the Retrieved Knowledge (marked with Source: <fileName>), end the response with:
 ### Sources
 - Source 1
 - Source 2
 
-Only include sources (filenames) that were actually used to answer the question. Do not invent source names.
+Only include sources (filenames) that were actually used to answer the question. Do not invent source names. Keep original English file names (e.g. hydration.md).
 
 IMPORTANT:
 The formatting should make the response easy to scan on a mobile screen.
@@ -105,7 +86,72 @@ Do not add unnecessary introductions such as:
 
 Start directly with the answer.`;
 
-export async function generateAnswer(context, question, previousMessages = []) {
+const LANGUAGE_RULES = {
+  en: `LANGUAGE AND READABILITY RULES (ENGLISH):
+1. Target response language: English. Regardless of previous conversation turns, output this answer in English.
+2. Use simple, everyday English that a general adult patient can understand without medical knowledge.
+3. Write as if explaining the topic to a person who has no medical background. Keep sentences short and natural.
+4. Avoid unnecessary medical, scientific, or technical terminology. Do NOT include medical terminology in parentheses after a simple explanation unless the user explicitly asks for the medical terminology (for example, write "sensitivity to light" instead of "sensitivity to light (photophobia)", "sensitivity to sound" instead of "sensitivity to sound (phonophobia)", and "sensitivity to smells" instead of "sensitivity to smells (osmophobia)").
+5. Avoid terms such as photophobia, phonophobia, osmophobia, cephalalgia, vasoconstriction, osmoreceptors, HPA axis, cortical spreading depression, or other detailed physiological or medical mechanisms. Do not include these terms in simple answers unless the user's question specifically requires them.
+6. For basic questions such as "What is migraine?", do not introduce "migraine aura" or other specialized concepts unless they are directly relevant to the question. If such a term is necessary, explain it in simple language.
+7. Prefer natural patient-friendly wording:
+   - "strong headache" instead of "moderate-to-severe head pain" when medically appropriate
+   - "brain health condition" or another simple accurate description instead of "neurological disorder" or other unnecessarily technical terminology
+   - "sensitivity to light" instead of "photophobia"
+   - "sensitivity to sound" instead of "phonophobia"
+   - "sensitivity to smells" instead of "osmophobia"
+8. If an important medical term must be used, explain it immediately in simple language.
+9. Do not use multiple medical terms in a single sentence unless they are necessary.
+10. Prefer active voice over complex passive constructions.
+11. Avoid unnecessarily formal words such as: "therefore", "hence", "subsequently", "manifestation", "exacerbation", "etiology", etc.
+12. The answer should sound like a helpful healthcare assistant explaining something to a patient, NOT like a medical textbook.
+13. Do NOT sacrifice medical accuracy for simplicity. Simplify the language, not the medical meaning.
+14. If the retrieved information does not sufficiently answer the question, clearly say: "I don't have enough information in the knowledge base."`,
+
+  hi: `LANGUAGE AND READABILITY RULES (HINDI / हिंदी):
+1. Target response language: Hindi. Regardless of the language of previous messages or conversation history, you MUST produce the final answer strictly in natural Hindi using Devanagari script.
+2. Respond in simple, natural, everyday Hindi (बोलचाल की सरल हिंदी) that an ordinary Indian user can easily understand.
+3. Do NOT use unnecessarily Sanskritized, archaic, literary, bureaucratic, or difficult technical Hindi words.
+4. Grounding & factual integrity: Translate the explanation naturally from the retrieved English knowledge base. Do NOT alter numbers, dates, measurements, percentages, medical thresholds, names of medicines, scientific terms, or factual claims. The factual meaning must remain identical to the retrieved documents.
+5. Technical terms: Do not force awkward translations. Terms such as "migraine" (माइग्रेन), "SHAP", "PSS-10", "machine learning", "AI", "weather", "barometric pressure" may remain in commonly understood English or standard terminology, surrounded by simple Hindi explanation.
+6. Prefer natural patient-friendly wording:
+   - Use "तेज सिरदर्द" or "माइग्रेन" instead of complex jargon
+   - "रोशनी से परेशानी" or "रोशनी के प्रति संवेदनशीलता" instead of "photophobia"
+   - "तेज आवाज़ से परेशानी" or "आवाज़ के प्रति संवेदनशीलता" instead of "phonophobia"
+   - "तेज गंध से परेशानी" instead of "osmophobia"
+7. Source names in the ### Sources section must retain their exact original English file names (e.g., - hydration.md).
+8. If the retrieved information does not sufficiently answer the question, clearly say: "मेरे पास ज्ञानकोष में पर्याप्त जानकारी नहीं है।" (I don't have enough information in the knowledge base.)`,
+
+  mr: `LANGUAGE AND READABILITY RULES (MARATHI / मराठी):
+1. Target response language: Marathi. Regardless of the language of previous messages or conversation history, you MUST produce the final answer strictly in natural Marathi using Devanagari script.
+2. Respond in simple, natural, everyday Marathi (दैनंदिन सोपी मराठी) that an ordinary Marathi-speaking user can easily understand.
+3. Do NOT use unnecessarily Sanskritized, archaic, literary, bureaucratic, or difficult technical Marathi words.
+4. Grounding & factual integrity: Translate the explanation naturally from the retrieved English knowledge base. Do NOT alter numbers, dates, measurements, percentages, medical thresholds, names of medicines, scientific terms, or factual claims. The factual meaning must remain identical to the retrieved documents.
+5. Technical terms: Do not force awkward translations. Terms such as "migraine" (मायग्रेन), "SHAP", "PSS-10", "machine learning", "AI", "weather", "barometric pressure" may remain in commonly understood English or standard terminology, surrounded by simple Marathi explanation.
+6. Prefer natural patient-friendly wording:
+   - Use "तीव्र डोकेदुखी" or "मायग्रेन" instead of complex jargon
+   - "प्रकाशाचा त्रास" or "प्रकाशाची संवेदनशीलता" instead of "photophobia"
+   - "मोठ्या आवाजाचा त्रास" or "आवाजाची संवेदनशीलता" instead of "phonophobia"
+   - "वासाचा त्रास" instead of "osmophobia"
+7. Source names in the ### Sources section must retain their exact original English file names (e.g., - hydration.md).
+8. If the retrieved information does not sufficiently answer the question, clearly say: "माझ्याकडे ज्ञानकोशात पुरेशी माहिती उपलब्ध नाही." (I don't have enough information in the knowledge base.)`
+};
+
+export function buildSystemInstructions(language = "en") {
+  const validatedLang = (typeof language === "string" && SUPPORTED_LANGUAGES.includes(language.trim().toLowerCase()))
+    ? language.trim().toLowerCase()
+    : "en";
+
+  const languageRules = LANGUAGE_RULES[validatedLang] || LANGUAGE_RULES.en;
+
+  return `${BASE_SYSTEM_INSTRUCTIONS}
+
+${languageRules}`;
+}
+
+export const SYSTEM_INSTRUCTIONS = buildSystemInstructions("en");
+
+export async function generateAnswer(context, question, previousMessages = [], language = "en") {
   // Support both array of document objects and a raw string for context
   let formattedContext = "";
   if (Array.isArray(context)) {
@@ -139,13 +185,37 @@ ${question}
 
   const currentQuestionMessage = new HumanMessage(userContent);
 
+  const validatedLang = (typeof language === "string" && SUPPORTED_LANGUAGES.includes(language.trim().toLowerCase()))
+    ? language.trim().toLowerCase()
+    : "en";
+
+  const activeSystemInstructions = buildSystemInstructions(validatedLang);
+
   const messages = [
-    new SystemMessage(SYSTEM_INSTRUCTIONS),
+    new SystemMessage(activeSystemInstructions),
     ...historyMessages,
     currentQuestionMessage,
   ];
 
-  const response = await model.invoke(messages);
+  let response;
+  let attempts = 0;
+  while (attempts < 3) {
+    try {
+      response = await model.invoke(messages);
+      break;
+    } catch (err) {
+      attempts++;
+      const isRateLimit = err?.status === 429 ||
+        err?.message?.toLowerCase().includes("rate limit") ||
+        err?.error?.error?.code === "rate_limit_exceeded";
+      if (isRateLimit && attempts < 3) {
+        console.warn(`[generateAnswer] Groq rate limit hit. Waiting 28s before retry (${attempts}/2)...`);
+        await new Promise((res) => setTimeout(res, 28000));
+      } else {
+        throw err;
+      }
+    }
+  }
 
   return response.content;
 }

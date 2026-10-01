@@ -4,8 +4,10 @@ import assert from "node:assert/strict";
 const SESSION_ID_REGEX = /^[A-Za-z0-9_-]{1,64}$/;
 const MAX_MESSAGE_LENGTH = 1000;
 
+const SUPPORTED_LANGUAGES = ["en", "hi", "mr"];
+
 function validateChatInput(body) {
-  const { message, sessionId } = body || {};
+  const { message, sessionId, language } = body || {};
 
   if (typeof message !== "string") {
     return { valid: false, status: 400, error: "Message is required and must be a string" };
@@ -39,7 +41,15 @@ function validateChatInput(body) {
     };
   }
 
-  return { valid: true, message: cleanMessage, sessionId: cleanSessionId };
+  let validatedLanguage = "en";
+  if (typeof language === "string") {
+    const cleanLang = language.trim().toLowerCase();
+    if (SUPPORTED_LANGUAGES.includes(cleanLang)) {
+      validatedLanguage = cleanLang;
+    }
+  }
+
+  return { valid: true, message: cleanMessage, sessionId: cleanSessionId, language: validatedLanguage };
 }
 
 describe("Chat Input Validation", () => {
@@ -154,4 +164,46 @@ describe("Chat Input Validation", () => {
       }
     });
   });
+
+  describe("Language Validation", () => {
+    it("should accept supported languages (en, hi, mr)", () => {
+      for (const lang of ["en", "hi", "mr"]) {
+        const res = validateChatInput({ message: "hello", sessionId: "sess-1", language: lang });
+        assert.equal(res.valid, true);
+        assert.equal(res.language, lang);
+      }
+    });
+
+    it("should normalize uppercase and whitespace in supported languages", () => {
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "HI" }).language, "hi");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "  mr  " }).language, "mr");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: " EN " }).language, "en");
+    });
+
+    it("should fallback to 'en' when language is omitted or undefined", () => {
+      const res = validateChatInput({ message: "hello", sessionId: "sess-1" });
+      assert.equal(res.valid, true);
+      assert.equal(res.language, "en");
+    });
+
+    it("should fallback to 'en' when language is null or empty string", () => {
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: null }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "" }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "   " }).language, "en");
+    });
+
+    it("should fallback to 'en' when language is unsupported (e.g. 'fr', 'es')", () => {
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "fr" }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "es" }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: "german" }).language, "en");
+    });
+
+    it("should fallback to 'en' when language is not a string (e.g. number, boolean, object)", () => {
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: 123 }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: true }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: { lang: "hi" } }).language, "en");
+      assert.equal(validateChatInput({ message: "hello", sessionId: "sess-1", language: ["mr"] }).language, "en");
+    });
+  });
 });
+

@@ -5,7 +5,7 @@ import {
   getPreviousMessages
 } from "./chatHistoryService.js";
 
-export async function getRAGResponse(question, sessionId) {
+export async function getRAGResponse(question, sessionId, language = "en") {
   const previousMessages = await getPreviousMessages(sessionId);
 
   await saveMessage(
@@ -20,7 +20,8 @@ export async function getRAGResponse(question, sessionId) {
   const answer = await generateAnswer(
     docs,
     question,
-    previousMessages
+    previousMessages,
+    language
   );
 
   await saveMessage(
