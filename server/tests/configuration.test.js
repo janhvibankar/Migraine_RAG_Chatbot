@@ -5,9 +5,10 @@ function parseMinSimilarity(envVal) {
   return Number(envVal ?? "0");
 }
 
-function parseAllowedOrigins(corsEnv) {
-  return corsEnv
-    ? corsEnv.split(",").map(origin => origin.trim()).filter(Boolean)
+function parseAllowedOrigins(ragAllowedEnv, corsEnv) {
+  const raw = ragAllowedEnv || corsEnv;
+  return raw
+    ? raw.split(",").map(origin => origin.trim()).filter(Boolean)
     : ["http://localhost:5173"];
 }
 

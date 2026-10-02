@@ -16,15 +16,16 @@ const app = express();
 
 app.use(helmet());
 
-const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(",").map(origin => origin.trim()).filter(Boolean)
+const rawOrigins = process.env.RAG_ALLOWED_ORIGINS || process.env.CORS_ORIGIN;
+const allowedOrigins = rawOrigins
+  ? rawOrigins.split(",").map(origin => origin.trim()).filter(Boolean)
   : ["http://localhost:5173"];
 
 app.use(
   cors({
     origin: allowedOrigins,
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 204
   })
 );
@@ -32,6 +33,10 @@ app.use(express.json({ limit: "20kb" }));
 
 app.get("/", (req, res) => {
   res.send("Server Running");
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
 });
 
 console.log("Google API Key:", process.env.GOOGLE_API_KEY ? "configured" : "NOT configured");
@@ -67,7 +72,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.RAG_PORT || process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
