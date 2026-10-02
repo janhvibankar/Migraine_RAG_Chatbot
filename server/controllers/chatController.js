@@ -1,4 +1,5 @@
 import { getRAGResponse } from "../services/ragService.js";
+import { detectLanguage } from "../services/languageDetector.js";
 
 const SESSION_ID_REGEX = /^[A-Za-z0-9_-]{1,64}$/;
 const MAX_MESSAGE_LENGTH = 1000;
@@ -44,22 +45,32 @@ export const chatWithBot = async (req, res) => {
       });
     }
 
-    // Validate language strictly against supported set with "en" fallback
-    let validatedLanguage = "en";
+    // Resolve language (manual override for en, hi, mr; auto-detect for "auto", omitted, or unrecognized)
+    let effectiveLanguage = "en";
+    let isAutoMode = true;
+
     if (typeof language === "string") {
       const cleanLang = language.trim().toLowerCase();
       if (SUPPORTED_LANGUAGES.includes(cleanLang)) {
-        validatedLanguage = cleanLang;
+        effectiveLanguage = cleanLang;
+        isAutoMode = false;
+      } else if (cleanLang === "auto") {
+        isAutoMode = true;
       }
     }
 
-    console.log(`[Chat API] Processing request | language="${validatedLanguage}" | session="${cleanSessionId}" | query="${cleanMessage.substring(0, 40)}"`);
+    if (isAutoMode) {
+      effectiveLanguage = detectLanguage(cleanMessage);
+    }
 
-    const { answer, sources } = await getRAGResponse(cleanMessage, cleanSessionId, validatedLanguage);
+    console.log(`[Chat API] Processing request | mode="${isAutoMode ? "auto" : "manual"}" | language="${effectiveLanguage}" | session="${cleanSessionId}" | query="${cleanMessage.substring(0, 40)}"`);
+
+    const { answer, sources } = await getRAGResponse(cleanMessage, cleanSessionId, effectiveLanguage);
 
     res.status(200).json({
       answer,
-      sources
+      sources,
+      language: effectiveLanguage
     });
 
   } catch (error) {

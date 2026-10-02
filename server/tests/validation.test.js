@@ -1,6 +1,8 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
+import { detectLanguage } from "../services/languageDetector.js";
+
 const SESSION_ID_REGEX = /^[A-Za-z0-9_-]{1,64}$/;
 const MAX_MESSAGE_LENGTH = 1000;
 
@@ -41,15 +43,24 @@ function validateChatInput(body) {
     };
   }
 
-  let validatedLanguage = "en";
+  let effectiveLanguage = "en";
+  let isAutoMode = true;
+
   if (typeof language === "string") {
     const cleanLang = language.trim().toLowerCase();
     if (SUPPORTED_LANGUAGES.includes(cleanLang)) {
-      validatedLanguage = cleanLang;
+      effectiveLanguage = cleanLang;
+      isAutoMode = false;
+    } else if (cleanLang === "auto") {
+      isAutoMode = true;
     }
   }
 
-  return { valid: true, message: cleanMessage, sessionId: cleanSessionId, language: validatedLanguage };
+  if (isAutoMode) {
+    effectiveLanguage = detectLanguage(cleanMessage);
+  }
+
+  return { valid: true, message: cleanMessage, sessionId: cleanSessionId, language: effectiveLanguage };
 }
 
 describe("Chat Input Validation", () => {
