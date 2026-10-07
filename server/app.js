@@ -10,8 +10,12 @@ dotenv.config();
 
 console.log("MongoDB URI:", process.env.MONGODB_URI ? "configured" : "NOT configured");
 
-await connectDB();
-
+try {
+  await connectDB();
+} catch (error) {
+  console.error("Failed to connect to the database. Exiting...");
+  process.exit(1);
+}
 const app = express();
 
 app.use(helmet());
