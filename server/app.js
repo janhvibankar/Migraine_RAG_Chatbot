@@ -1,4 +1,4 @@
-import "./config/dns-override.js";   //// added for connecting and also creted dns-override file via antiravity
+import "./config/dns-override.js";
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
@@ -19,7 +19,7 @@ app.use(helmet());
 const rawOrigins = process.env.RAG_ALLOWED_ORIGINS || process.env.CORS_ORIGIN;
 const allowedOrigins = rawOrigins
   ? rawOrigins.split(",").map(origin => origin.trim()).filter(Boolean)
-  : ["http://localhost:5173"];
+  : ["http://localhost:3000", "http://localhost:5173"];
 
 app.use(
   cors({
@@ -49,7 +49,7 @@ app.use((req, res) => {
   });
 });
 
-// Global error handling middleware for parser and runtime middleware errors
+// Global error handling middleware
 app.use((err, req, res, next) => {
   if (
     (err instanceof SyntaxError && (err.status === 400 || err.statusCode === 400)) ||
@@ -74,6 +74,9 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.RAG_PORT || process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Keep process active even if async connection handles close
+setInterval(() => {}, 60000);

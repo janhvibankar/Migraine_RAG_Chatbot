@@ -21,19 +21,24 @@ export const db = client.db("migraine_rag");
 export const knowledgeCollection = db.collection("knowledge_chunks");
 export const chatHistoryCollection = db.collection("chat_history");
 
-let isConnected = false;
+let connectionPromise;
 
 export async function connectDB() {
-  try {
-    if (!isConnected) {
-      await client.connect();
-      isConnected = true;
-    }
-    await db.command({ ping: 1 });
-    console.log("✅ MongoDB Atlas Connected");
-  } catch (error) {
-    console.error("⚠️ MongoDB Connection Warning:", error.message);
+  if (!connectionPromise) {
+    connectionPromise = client
+      .connect()
+      .then(() => db.command({ ping: 1 }))
+      .then(() => {
+        console.log("✅ MongoDB Atlas Connected");
+        return client;
+      })
+      .catch((error) => {
+        connectionPromise = undefined;
+        throw error;
+      });
   }
+
+  return connectionPromise;
 }
 
 export { client };
